@@ -81,3 +81,101 @@ if (navLinks.length > 0) {
   window.addEventListener("resize", refreshActiveState);
   refreshActiveState();
 }
+
+const adhesionForm = document.querySelector("#adhesion-form");
+
+if (adhesionForm) {
+  const startedAtField = adhesionForm.querySelector("#adhesion-started-at");
+  const statusElement = adhesionForm.querySelector("#adhesion-form-status");
+  const submitButton = adhesionForm.querySelector("#adhesion-submit");
+
+  const defaultApiEndpoint = (() => {
+    const isLocalhost =
+      window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    return isLocalhost
+      ? "http://localhost:3000/api/adhesions"
+      : "https://adhesion.datacanvas.space/api/adhesions";
+  })();
+
+  const apiEndpoint = adhesionForm.getAttribute("data-api-endpoint") || defaultApiEndpoint;
+
+  const setStatus = (message, isError) => {
+    if (!statusElement) {
+      return;
+    }
+
+    statusElement.textContent = message;
+    statusElement.classList.toggle("is-error", Boolean(isError));
+  };
+
+  const resetStartedAt = () => {
+    if (startedAtField) {
+      startedAtField.value = Date.now().toString();
+    }
+  };
+
+  resetStartedAt();
+
+  adhesionForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setStatus("", false);
+
+    if (!adhesionForm.checkValidity()) {
+      adhesionForm.reportValidity();
+      setStatus("Merci de vérifier les champs obligatoires.", true);
+      return;
+    }
+
+    const formData = new FormData(adhesionForm);
+    const messageValue = String(formData.get("message") || "").trim();
+
+    const payload = {
+      firstName: String(formData.get("firstName") || "").trim(),
+      lastName: String(formData.get("lastName") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      residenceCountry: String(formData.get("residenceCountry") || "").trim(),
+      message: messageValue,
+      acceptedStatutes: formData.get("acceptedStatutes") === "on",
+      acceptedPrivacy: formData.get("acceptedPrivacy") === "on",
+      hp: String(formData.get("hp") || ""),
+      startedAt: String(formData.get("startedAt") || "")
+    };
+
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok || !body?.ok) {
+        const errorMessage =
+          typeof body?.error === "string" && body.error.length > 0
+            ? body.error
+            : "Envoi impossible pour le moment. Merci de réessayer.";
+        setStatus(errorMessage, true);
+        return;
+      }
+
+      adhesionForm.reset();
+      resetStartedAt();
+      setStatus(
+        "Demande envoyée. Vous allez recevoir un email de confirmation de réception.",
+        false
+      );
+    } catch {
+      setStatus("Erreur réseau. Merci de réessayer dans quelques instants.", true);
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+      }
+    }
+  });
+}

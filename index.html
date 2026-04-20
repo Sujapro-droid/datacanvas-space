@@ -72,24 +72,28 @@
         <div class="section-head">
           <div>
             <span class="kicker">Statuts</span>
-            <h2>Cadre simple et clair</h2>
+            <h2>Cadre institutionnel officiel</h2>
           </div>
-          <p>L'association est à but idéal et non lucratif, avec une gouvernance légère et une signature collective à deux.</p>
+          <p>Les statuts de Toiles de Données fixent un cadre non lucratif, une gouvernance explicite et des règles de responsabilité conformes au droit suisse des associations.</p>
         </div>
         <div class="grid-2">
           <article class="card">
-            <h3>Points essentiels</h3>
+            <h3>Structure juridique (extraits)</h3>
             <ul>
-              <li>But culturel, scientifique et pédagogique.</li>
-              <li>Comité resserré et responsabilités définies en 2026.</li>
-              <li>Adhésion annuelle avec droits des membres.</li>
-              <li>Fonctionnement transparent et non lucratif.</li>
+              <li>Article 1 : association à but idéal et non lucratif (Code civil suisse, art. 60 ss).</li>
+              <li>Article 2 : siège social à Neunkirch (SH), Suisse.</li>
+              <li>Article 3 : but culturel, scientifique et pédagogique autour des arts, sciences et données.</li>
+              <li>Article 8 : signature collective à deux pour engager l'association.</li>
+              <li>Article 10 : en cas de dissolution, affectation de l'actif à une institution d'intérêt public analogue.</li>
             </ul>
           </article>
           <article class="card">
-            <h3>Version simplifiée (Executive Summary)</h3>
-            <p>Le texte intégral reste disponible pour consultation juridique et administrative.</p>
-            <a class="btn btn-dark statuts-link" href="documents/Statuts_Toiles_de_Donnees.pdf" download>Lire les statuts complets</a>
+            <h3>Version complète et référence</h3>
+            <p>Pour lecture juridique complète, consulte la page statutaire détaillée et le document PDF officiel.</p>
+            <div class="button-row">
+              <a class="btn btn-dark" href="statuts.html">Lire la version web complète</a>
+              <a class="btn btn-outline" href="documents/Statuts_Toiles_de_Donnees.pdf" download>Télécharger le PDF officiel</a>
+            </div>
           </article>
         </div>
       </div>
@@ -98,21 +102,23 @@
     <section class="section section-dark" id="adhesion">
       <div class="wrap stack-lg">
         <div class="stack adhesion-intro">
-          <span class="kicker kicker-light">Approchez-vous des toiles<br>de données</span>
-          <h2><span>Devenir un membre, soutenir</span> <span>Toile de données</span></h2>
-          <p>L'adhésion donne accès aux archives, soutient la tenue des colloques et permet de prolonger l'esprit de Gargilesse au-delà des journées de nos rencontres.</p>
+          <span class="kicker kicker-light">Demande d'adhésion</span>
+          <h2><span>Rejoindre Toiles de Données</span> <span>en toute simplicité</span></h2>
+          <p>Le formulaire ci-dessous permet de déposer une demande d'adhésion. Cette étape ne finalise pas l'adhésion immédiatement&nbsp;: l'équipe examine chaque demande puis vous répond par email.</p>
           <div class="grid-2">
             <div class="mini">
-              <h3>Avantages</h3>
+              <h3>Informations utiles</h3>
               <ul>
-                <li>Accès aux archives et contenus réservés.</li>
-                <li>Priorité d'information sur les rencontres.</li>
-                <li>Soutien visible d'un projet culturel exigeant.</li>
+                <li>Cotisation de référence 2026&nbsp;: 25 CHF / EUR.</li>
+                <li>Période de validité visée&nbsp;: année civile 2026.</li>
+                <li>Une confirmation de réception vous est envoyée automatiquement.</li>
               </ul>
             </div>
             <div class="mini">
-              <h3>Comment nous rejoindre</h3>
-              <p>Cotisation 2026 : 25 CHF / EUR. Bulletin simplifié ci-dessous, puis confirmation par l'équipe.</p>
+              <h3>Étapes</h3>
+              <p>1. Vous envoyez votre demande.</p>
+              <p>2. L'association examine votre dossier.</p>
+              <p>3. Vous recevez un retour par email.</p>
               <p><a class="mail-link" href="mailto:contact@datacanvas.space">contact@datacanvas.space</a></p>
             </div>
           </div>
@@ -120,29 +126,47 @@
       </div>
 
       <div class="wrap" id="bulletin">
-        <form class="form-card" action="#" method="post" onsubmit="return false;">
-          <h3>Bulletin d'adhésion</h3>
+        <form
+          class="form-card"
+          id="adhesion-form"
+          action="#"
+          method="post"
+          novalidate>
+          <h3>Demande d'adhésion</h3>
+          <p class="form-meta">Cotisation annuelle de référence&nbsp;: 25 CHF / EUR</p>
+          <p class="form-meta">Période de validité&nbsp;: année civile 2026</p>
           <div class="form-grid">
-            <label>Nom
-              <input type="text" name="nom" placeholder="Nom">
-            </label>
             <label>Prénom
-              <input type="text" name="prenom" placeholder="Prénom">
+              <input type="text" name="firstName" placeholder="Prénom" required maxlength="80" autocomplete="given-name">
+            </label>
+            <label>Nom
+              <input type="text" name="lastName" placeholder="Nom" required maxlength="80" autocomplete="family-name">
             </label>
             <label>Email
-              <input type="email" name="email" placeholder="adresse@domaine.com">
+              <input type="email" name="email" placeholder="adresse@domaine.com" required maxlength="254" autocomplete="email">
             </label>
-            <label>Ville
-              <input type="text" name="ville" placeholder="Ville">
+            <label>Pays de résidence
+              <input type="text" name="residenceCountry" placeholder="Pays de résidence" required maxlength="120" autocomplete="country-name">
             </label>
           </div>
           <label>Message (optionnel)
-            <textarea name="message" placeholder="Votre message"></textarea>
+            <textarea name="message" placeholder="Votre message" maxlength="1200"></textarea>
           </label>
+          <label class="consent-row">
+            <input type="checkbox" name="acceptedStatutes" required>
+            <span>J'accepte les <a href="statuts.html">statuts</a>.</span>
+          </label>
+          <label class="consent-row">
+            <input type="checkbox" name="acceptedPrivacy" required>
+            <span>J'ai lu la <a href="politique-confidentialite.html">politique de confidentialité</a>.</span>
+          </label>
+          <input class="hp-field" type="text" name="hp" autocomplete="off" tabindex="-1" aria-hidden="true">
+          <input type="hidden" name="startedAt" id="adhesion-started-at">
           <div class="button-row">
-            <button class="btn btn-solid" type="submit">Bulletin d'adhésion</button>
-            <a class="btn btn-outline" href="documents/Statuts_Toiles_de_Donnees.pdf" download>Consulter nos statuts</a>
+            <button class="btn btn-solid" type="submit" id="adhesion-submit">Envoyer ma demande d'adhésion</button>
+            <a class="btn btn-outline" href="statuts.html">Lire les statuts</a>
           </div>
+          <p class="form-status" id="adhesion-form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
@@ -247,8 +271,9 @@
         <p class="footer-small">Navigation</p>
         <div class="footer-links">
           <a href="#association">Association</a>
-          <a href="#statuts">Statuts</a>
+          <a href="statuts.html">Statuts</a>
           <a href="#adhesion">Adhesion</a>
+          <a href="politique-confidentialite.html">Politique de confidentialite</a>
           <a href="#rencontres">Rencontres 2026</a>
         </div>
       </div>
