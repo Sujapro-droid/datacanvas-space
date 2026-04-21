@@ -5,10 +5,10 @@ const siteHeader = document.querySelector(".site-header");
 if (navLinks.length > 0) {
   const sectionGroups = [
     { key: "association", elements: [document.querySelector("#association")] },
-    { key: "lieu", elements: [document.querySelector("#gargilesse-map"), document.querySelector("#lieu")] },
     { key: "statuts", elements: [document.querySelector("#statuts")] },
     { key: "adhesion", elements: [document.querySelector("#adhesion")] },
-    { key: "rencontres", elements: [document.querySelector("#rencontres")] }
+    { key: "rencontres", elements: [document.querySelector("#rencontres")] },
+    { key: "lieu", elements: [document.querySelector("#gargilesse-map"), document.querySelector("#lieu")] }
   ]
     .map((group) => ({
       ...group,
