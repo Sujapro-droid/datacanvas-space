@@ -522,6 +522,70 @@ textarea {
   color: #8f1f1f;
 }
 
+.form-success {
+  margin-top: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(31, 106, 57, 0.28);
+  background: rgba(255, 255, 255, 0.88);
+  color: #1f6a39;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.form-success.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.form-success__icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  position: relative;
+  border-radius: 999px;
+  background: #1f6a39;
+  box-shadow: 0 0 0 0 rgba(31, 106, 57, 0.22);
+}
+
+.form-success.is-visible .form-success__icon {
+  animation: success-pulse 720ms ease-out;
+}
+
+.form-success__icon::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  width: 9px;
+  height: 15px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg) scale(0.72);
+  opacity: 0;
+}
+
+.form-success.is-visible .form-success__icon::after {
+  animation: success-check 360ms ease 160ms forwards;
+}
+
+.form-success__copy {
+  display: grid;
+  gap: 2px;
+  font-size: 0.9rem;
+}
+
+.form-success__copy strong {
+  color: #1f6a39;
+}
+
 .button-row {
   display: flex;
   flex-wrap: wrap;
@@ -650,6 +714,35 @@ address {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes success-pulse {
+  0% {
+    transform: scale(0.88);
+    box-shadow: 0 0 0 0 rgba(31, 106, 57, 0.28);
+  }
+
+  62% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 12px rgba(31, 106, 57, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(31, 106, 57, 0);
+  }
+}
+
+@keyframes success-check {
+  from {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.72);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
   }
 }
 

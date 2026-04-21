@@ -87,6 +87,7 @@ const adhesionForm = document.querySelector("#adhesion-form");
 if (adhesionForm) {
   const startedAtField = adhesionForm.querySelector("#adhesion-started-at");
   const statusElement = adhesionForm.querySelector("#adhesion-form-status");
+  const successElement = adhesionForm.querySelector("#adhesion-form-success");
   const submitButton = adhesionForm.querySelector("#adhesion-submit");
 
   const apiEndpoints = (() => {
@@ -112,6 +113,23 @@ if (adhesionForm) {
 
     statusElement.textContent = message;
     statusElement.classList.toggle("is-error", Boolean(isError));
+
+    if (successElement && (isError || !message)) {
+      successElement.classList.remove("is-visible");
+      successElement.setAttribute("aria-hidden", "true");
+    }
+  };
+
+  const showSuccess = () => {
+    if (!successElement) {
+      return;
+    }
+
+    successElement.classList.remove("is-visible");
+    successElement.setAttribute("aria-hidden", "false");
+    window.requestAnimationFrame(() => {
+      successElement.classList.add("is-visible");
+    });
   };
 
   const resetStartedAt = () => {
@@ -199,6 +217,7 @@ if (adhesionForm) {
         "Demande envoyée. Vous allez recevoir un email de confirmation de réception.",
         false
       );
+      showSuccess();
     } catch {
       setStatus("Erreur réseau. Merci de réessayer dans quelques instants.", true);
     } finally {
