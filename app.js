@@ -1,6 +1,17 @@
 const navLinks = Array.from(document.querySelectorAll(".site-nav a[data-section]"));
 const indicatorSteps = Array.from(document.querySelectorAll(".section-indicator-step[data-step]"));
 const siteHeader = document.querySelector(".site-header");
+const scrollLine = document.querySelector(".scroll-line");
+
+const syncScrollLineProgress = () => {
+  if (!scrollLine) {
+    return;
+  }
+
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
+  scrollLine.style.setProperty("--scroll-progress", progress.toFixed(4));
+};
 
 if (navLinks.length > 0) {
   const sectionGroups = [
@@ -67,6 +78,7 @@ if (navLinks.length > 0) {
     ticking = true;
     window.requestAnimationFrame(() => {
       setActiveLink(getActiveKey());
+      syncScrollLineProgress();
       ticking = false;
     });
   };
@@ -80,6 +92,10 @@ if (navLinks.length > 0) {
   window.addEventListener("scroll", refreshActiveState, { passive: true });
   window.addEventListener("resize", refreshActiveState);
   refreshActiveState();
+} else {
+  syncScrollLineProgress();
+  window.addEventListener("scroll", syncScrollLineProgress, { passive: true });
+  window.addEventListener("resize", syncScrollLineProgress);
 }
 
 const adhesionForm = document.querySelector("#adhesion-form");
