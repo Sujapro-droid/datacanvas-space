@@ -89,15 +89,21 @@ if (adhesionForm) {
   const statusElement = adhesionForm.querySelector("#adhesion-form-status");
   const submitButton = adhesionForm.querySelector("#adhesion-submit");
 
-  const defaultApiEndpoint = (() => {
+  const apiEndpoints = (() => {
     const isLocalhost =
       window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-    return isLocalhost
-      ? "http://localhost:3000/api/adhesions"
-      : "https://adhesion.datacanvas.space/api/adhesions";
-  })();
 
-  const apiEndpoint = adhesionForm.getAttribute("data-api-endpoint") || defaultApiEndpoint;
+    if (isLocalhost) {
+      return ["http://localhost:3000/api/adhesions"];
+    }
+
+    const fromHtml = adhesionForm.getAttribute("data-api-endpoint");
+    return [
+      fromHtml,
+      "https://toiles-adhesion-app.vercel.app/api/adhesions",
+      "https://toiles-adhesion-app-sujapro-droid.vercel.app/api/adhesions"
+    ].filter(Boolean);
+  })();
 
   const setStatus = (message, isError) => {
     if (!statusElement) {
@@ -146,15 +152,38 @@ if (adhesionForm) {
     }
 
     try {
-      const response = await fetch(apiEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+      let response = null;
+      let body = {};
+      let reachedEndpoint = false;
 
-      const body = await response.json().catch(() => ({}));
+      for (const endpoint of apiEndpoints) {
+        try {
+          const candidateResponse = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (candidateResponse.status === 404) {
+            continue;
+          }
+
+          response = candidateResponse;
+          body = await candidateResponse.json().catch(() => ({}));
+          reachedEndpoint = true;
+          break;
+        } catch {
+          // Essaie l'URL suivante.
+        }
+      }
+
+      if (!reachedEndpoint || !response) {
+        setStatus("API temporairement indisponible. Merci de réessayer dans quelques minutes.", true);
+        return;
+      }
+
       if (!response.ok || !body?.ok) {
         const errorMessage =
           typeof body?.error === "string" && body.error.length > 0
