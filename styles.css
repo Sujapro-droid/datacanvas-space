@@ -437,7 +437,16 @@ img {
 .card li,
 .mini li,
 .modal-list li {
-  list-style: disc;
+  list-style: none;
+  position: relative;
+}
+
+.card li::before,
+.mini li::before,
+.modal-list li::before {
+  content: "-";
+  position: absolute;
+  left: -18px;
 }
 
 .form-card {
