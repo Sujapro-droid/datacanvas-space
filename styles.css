@@ -224,6 +224,35 @@ img {
   color: var(--muted);
 }
 
+#association {
+  padding-bottom: 58px;
+}
+
+#association .section-head {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+#association .section-head p {
+  max-width: none;
+}
+
+#statuts {
+  padding-top: 58px;
+}
+
+#statuts .grid-2 .card:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+#statuts .grid-2 .card:last-child .button-row {
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
 .section-dark .section-head p {
   color: rgba(255, 255, 255, 0.85);
 }
@@ -454,6 +483,10 @@ img {
   padding: 24px;
 }
 
+.form-card > .button-row {
+  margin-top: 22px;
+}
+
 .form-card h3 {
   margin-bottom: 14px;
 }
@@ -519,6 +552,10 @@ textarea {
   color: #1f6a39;
 }
 
+.form-status:empty {
+  display: none;
+}
+
 .form-status.is-error {
   color: #8f1f1f;
 }
@@ -538,6 +575,10 @@ textarea {
   transition:
     opacity 220ms ease,
     transform 220ms ease;
+}
+
+.form-success[aria-hidden="true"] {
+  display: none;
 }
 
 .form-success.is-visible {
@@ -661,6 +702,13 @@ textarea {
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   padding: 28px;
+}
+
+#rencontres,
+#gargilesse-map,
+#lieu {
+  padding-top: 68px;
+  padding-bottom: 68px;
 }
 
 .footer {
