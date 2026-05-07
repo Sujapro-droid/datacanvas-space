@@ -321,13 +321,15 @@ img {
 .photo-card {
   position: relative;
   overflow: hidden;
-  min-height: 320px;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
   background: #ddd;
 }
 
 .photo-card img {
   height: 100%;
   object-fit: cover;
+  object-position: center 72%;
 }
 
 .photo-card figcaption {
