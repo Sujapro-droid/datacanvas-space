@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700;800&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="assets/L1008206-hero.webp">
 </head>
 <body>
   <header class="site-header">
@@ -28,7 +29,7 @@
   </header>
 
   <main id="top">
-    <section class="hero" style="--hero-image: url('assets/L1008206.JPG');">
+    <section class="hero" style="--hero-image: url('assets/L1008206-hero.webp');">
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">LES RENCONTRES DE GARGILESSE 2026</p>
@@ -224,7 +225,7 @@
         </div>
         <div class="button-row">
           <a class="btn btn-solid" href="documents/programme-rencontres-gargilesse-2026.docx" download="programme-rencontres-gargilesse-2026.docx">Programme détaillé</a>
-          <a class="btn btn-outline" href="documents/kit-media-rencontres-gargilesse-2026.pptx" download="kit-media-rencontres-gargilesse-2026.pptx">Kit média presse</a>
+          <a class="btn btn-outline" id="presse" href="documents/kit-media-rencontres-gargilesse-2026.pptx" download="kit-media-rencontres-gargilesse-2026.pptx">Kit média presse</a>
           <a class="btn btn-dark" href="#bulletin">Je veux m'inscrire</a>
         </div>
       </div>
@@ -264,7 +265,7 @@
           <p>Le colloque aura lieu dans une très vieille maison d'artiste, dite autrefois <em>Maison du Bailli</em>. Entre la fraîcheur de murs épais et le jardin sur la rivière, la pensée voyage librement, tissant un lien entre la poésie du geste, la précision de la science et le mouvement des données.</p>
         </div>
         <figure class="photo-card">
-          <img src="assets/IMG_9241.jpg" alt="Maison du Bailli à Gargilesse">
+          <img src="assets/IMG_9241-site.webp" alt="Maison du Bailli à Gargilesse" loading="lazy">
           <figcaption>
             <h3>Maison du Bailli (Lieu d'échanges.)</h3>
             <p>Entre des collines silencieuses entourant cette conque de verdure, la lumière change au rythme lent du Berry.</p>
@@ -286,6 +287,7 @@
           <a href="#association">Association</a>
           <a href="statuts.html">Statuts</a>
           <a href="#adhesion">Adhésion</a>
+          <a href="#presse">Presse</a>
           <a href="politique-confidentialite.html">Politique de confidentialité</a>
           <a href="#rencontres">Rencontres 2026</a>
         </div>
