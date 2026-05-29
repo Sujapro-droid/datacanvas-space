@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700;800&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/i18n.css">
 </head>
 <body>
   <header class="site-header">
@@ -16,10 +17,17 @@
       <a class="brand" href="index.html#top" aria-label="Retour au onepager">
         <span class="brand-text">Toiles de Données</span>
       </a>
-      <nav class="site-nav" aria-label="Navigation">
-        <a href="index.html#adhesion">Adhésion</a>
-        <a href="statuts.html">Statuts</a>
-      </nav>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Navigation">
+          <a href="index.html#adhesion">Adhésion</a>
+          <a href="statuts.html">Statuts</a>
+        </nav>
+        <div class="language-switcher" aria-label="Sélecteur de langue">
+          <button type="button" data-set-lang="fr" aria-pressed="true">FR</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-set-lang="de" aria-pressed="false">DE</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -161,5 +169,7 @@
       </div>
     </section>
   </main>
+  <script src="assets/js/translations.js"></script>
+  <script src="assets/js/i18n.js"></script>
 </body>
 </html>

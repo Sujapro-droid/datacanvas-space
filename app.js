@@ -106,12 +106,24 @@ if (adhesionForm) {
     ].filter(Boolean);
   })();
 
+  let currentStatusMessage = "";
+
+  const translateStatus = (message) => {
+    if (!message || !window.DataCanvasI18n) {
+      return message;
+    }
+
+    return window.DataCanvasI18n.translateText(message);
+  };
+
   const setStatus = (message, isError) => {
+    currentStatusMessage = message;
+
     if (!statusElement) {
       return;
     }
 
-    statusElement.textContent = message;
+    statusElement.textContent = translateStatus(message);
     statusElement.classList.toggle("is-error", Boolean(isError));
 
     if (successElement && (isError || !message)) {
@@ -119,6 +131,12 @@ if (adhesionForm) {
       successElement.setAttribute("aria-hidden", "true");
     }
   };
+
+  window.addEventListener("datacanvas:languagechange", () => {
+    if (statusElement && currentStatusMessage) {
+      statusElement.textContent = translateStatus(currentStatusMessage);
+    }
+  });
 
   const showSuccess = () => {
     if (!successElement) {
