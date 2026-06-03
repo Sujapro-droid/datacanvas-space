@@ -1,6 +1,7 @@
 (function () {
   var translations = { en: {}, de: {} };
   [
+    ["T?l?charger la chronique du Bailliage", "Download the Bailliage chronicle", "Chronik des Bailliage herunterladen"],
     ["Toiles de Données", "Toiles de Données", "Toiles de Données"],
     ["Association Toiles de Données", "Toiles de Données Association", "Verein Toiles de Données"],
     ["Navigation", "Navigation", "Navigation"],
